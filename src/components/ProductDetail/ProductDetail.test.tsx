@@ -26,7 +26,9 @@ vi.mock('../ProductActions', () => ({
 describe('ProductDetail', () => {
   it('renders without errors', () => {
     const { container } = render(<ProductDetail />);
-    expect(container).toBeInTheDocument();
+    const rootElement = container.firstChild as HTMLElement;
+    expect(rootElement).toBeInTheDocument();
+    expect(rootElement.tagName).toBe('DIV');
   });
 
   it('renders ProductNavigation component', () => {
@@ -77,7 +79,7 @@ describe('ProductDetail', () => {
     expect(infoSectionDiv?.className).toMatch(/infoSection/);
   });
 
-  it('renders all child components in correct order', () => {
+  it('renders all child components', () => {
     render(<ProductDetail />);
     const navigation = screen.getByTestId('product-navigation');
     const image = screen.getByTestId('product-image');
